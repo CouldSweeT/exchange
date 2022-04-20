@@ -72,10 +72,10 @@ const ExchangeRates: React.FC = () => {
         </h1>
         <div className="header__exchange">
           <div className='cell'>
-            {`EUR ${(exchange.UAH / exchange.EUR).toFixed(2)}`}
+            {`EUR ${parseInt(`${exchange.UAH / exchange.EUR * 100}`) / 100}`}
           </div>
           <div className='cell'>
-            {`USD ${(exchange.UAH / exchange.USD).toFixed(2)}`}
+            {`USD ${parseInt(`${exchange.UAH / exchange.USD * 100}`) / 100}`}
           </div>
         </div>
       </header>
