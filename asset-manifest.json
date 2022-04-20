@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/exchange/static/css/main.8dd78784.css",
+    "main.js": "/exchange/static/js/main.ca51830b.js",
+    "index.html": "/exchange/index.html",
+    "main.8dd78784.css.map": "/exchange/static/css/main.8dd78784.css.map",
+    "main.ca51830b.js.map": "/exchange/static/js/main.ca51830b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8dd78784.css",
+    "static/js/main.ca51830b.js"
+  ]
+}
