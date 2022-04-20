@@ -1,0 +1,47 @@
+.header {
+  height: 100px;
+  background: blue;
+
+  &__exchange {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  background-color: yellow;
+}
+
+.title {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.exchange {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  &__input,
+  &__select {
+    height: 32px;
+    box-sizing: border-box;
+  }
+
+  &__from,
+  &__to {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+.cell {
+  font-size: 20px;
+}
