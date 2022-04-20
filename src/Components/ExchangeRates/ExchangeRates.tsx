@@ -103,13 +103,13 @@ const ExchangeRates: React.FC = () => {
             <input
               className="exchange__input"
               type="number"
-              value={toValue}
+              value={(parseInt(`${toValue * 100}`)) / 100}
               onChange={handleToValueChange}
               min={0}
             />
             <select
               className="exchange__select"
-              value={(parseInt(`${toValue * 100}`)) / 100}
+              value={toCurrency}
               onChange={handleToCurrencyChange}
             >
               <option value="UAH">UAH</option>
