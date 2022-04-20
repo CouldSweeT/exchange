@@ -1,11 +1,11 @@
 import React, { useEffect, useState} from 'react'
-import "./Exchange.scss"
+import "./ExchangeRates.scss"
 import {request} from "../../api/api";
 import {Currency, Exchange} from "../../types";
 
 
-const Exchange: React.FC = () => {
-  const [exchange, setExchange] = useState<Exchange>({ EUR: { code: 'EUR', value: 0}, USD: { code: 'USD', value: 0, }, UAH: { code: 'UAH', value: 1}})
+const ExchangeRates: React.FC = () => {
+  const [exchange, setExchange] = useState<Exchange>({ EUR: 0, USD: 0, UAH: 1})
   const [fromValue, setFromValue] = useState(1);
   const [toValue, setToValue] = useState(1);
 
@@ -15,26 +15,27 @@ const Exchange: React.FC = () => {
 
 
   const convertFromTo = () => {
-    const fromRate = exchange[fromCurrency].value;
+    const fromRate = exchange[fromCurrency];
     const valueInUAH = fromValue / fromRate;
-    const toRate = exchange[toCurrency].value;
+    const toRate = exchange[toCurrency];
     setToValue(valueInUAH * toRate);
   };
 
   const convertToFrom = () => {
-    const toRate = exchange[toCurrency].value;
+    const toRate = exchange[toCurrency];
     const valueInUAH = toValue / toRate;
-    const fromRate = exchange[fromCurrency].value;
+    const fromRate = exchange[fromCurrency];
     setFromValue(valueInUAH * fromRate);
   };
 
   useEffect(() => {
     (async () => {
       const currentExchange = await request();
+      console.log(currentExchange.conversion_rates)
 
-      setExchange(currentExchange.data)
+      setExchange(currentExchange.conversion_rates)
     })();
-  }, [exchange])
+  }, [])
 
   useEffect(() => {
     convertFromTo();
@@ -63,20 +64,18 @@ const Exchange: React.FC = () => {
     setToValue(parseFloat(e.currentTarget.value));
   };
 
-
-
   return (
     <>
       <header className="header">
         <h1 className="title">
-          Текущий курс гривны
+          Поточний курс гривні
         </h1>
         <div className="header__exchange">
           <div className='cell'>
-            {`EUR ${(exchange.UAH.value / exchange.EUR.value).toFixed(2)}`}
+            {`EUR ${(exchange.UAH / exchange.EUR).toFixed(2)}`}
           </div>
           <div className='cell'>
-            {`USD ${(exchange.UAH.value / exchange.USD.value).toFixed(2)}`}
+            {`USD ${(exchange.UAH / exchange.USD).toFixed(2)}`}
           </div>
         </div>
       </header>
@@ -86,7 +85,7 @@ const Exchange: React.FC = () => {
             <input
               type="number"
               className="exchange__input"
-              value={fromValue.toFixed(2)}
+              value={(parseInt(`${fromValue * 100}`)) / 100}
               onChange={handleFromValueChange}
               min={0}
             />
@@ -95,7 +94,7 @@ const Exchange: React.FC = () => {
               value={fromCurrency}
               onChange={handleFromCurrencyChange}
             >
-              <option value="UAH" selected>UAH</option>
+              <option value="UAH">UAH</option>
               <option value="USD">USD</option>
               <option value="EUR">EUR</option>
             </select>
@@ -104,17 +103,17 @@ const Exchange: React.FC = () => {
             <input
               className="exchange__input"
               type="number"
-              value={toValue.toFixed(2)}
+              value={toValue}
               onChange={handleToValueChange}
               min={0}
             />
             <select
               className="exchange__select"
-              value={toCurrency}
+              value={(parseInt(`${toValue * 100}`)) / 100}
               onChange={handleToCurrencyChange}
             >
               <option value="UAH">UAH</option>
-              <option value="USD" selected>USD</option>
+              <option value="USD">USD</option>
               <option value="EUR">EUR</option>
             </select>
           </div>
@@ -124,4 +123,4 @@ const Exchange: React.FC = () => {
   )
 }
 
-export default Exchange;
+export default ExchangeRates;
