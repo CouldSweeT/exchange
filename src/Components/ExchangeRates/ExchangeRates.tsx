@@ -1,10 +1,10 @@
 import React, { useEffect, useState} from 'react'
-import "./Header.scss"
+import "./Exchange.scss"
 import {request} from "../../api/api";
 import {Currency, Exchange} from "../../types";
 
 
-const Header: React.FC = () => {
+const Exchange: React.FC = () => {
   const [exchange, setExchange] = useState<Exchange>({ EUR: { code: 'EUR', value: 0}, USD: { code: 'USD', value: 0, }, UAH: { code: 'UAH', value: 1}})
   const [fromValue, setFromValue] = useState(1);
   const [toValue, setToValue] = useState(1);
@@ -124,4 +124,4 @@ const Header: React.FC = () => {
   )
 }
 
-export default Header;
+export default Exchange;
