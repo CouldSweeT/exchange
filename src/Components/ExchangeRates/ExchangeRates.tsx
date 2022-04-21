@@ -31,7 +31,7 @@ const ExchangeRates: React.FC = () => {
   useEffect(() => {
     (async () => {
       const currentExchange = await request();
-      console.log(currentExchange.conversion_rates)
+      console.log()
 
       setExchange(currentExchange.conversion_rates)
     })();
@@ -72,10 +72,10 @@ const ExchangeRates: React.FC = () => {
         </h1>
         <div className="header__exchange">
           <div className='cell'>
-            {`EUR ${parseInt(`${exchange.UAH / exchange.EUR * 100}`) / 100}`}
+            {`EUR ${+(exchange.UAH / exchange.EUR).toFixed(2)}`}
           </div>
           <div className='cell'>
-            {`USD ${parseInt(`${exchange.UAH / exchange.USD * 100}`) / 100}`}
+            {`USD ${+(exchange.UAH / exchange.USD).toFixed(2)}`}
           </div>
         </div>
       </header>
@@ -85,7 +85,7 @@ const ExchangeRates: React.FC = () => {
             <input
               type="number"
               className="exchange__input"
-              value={(parseInt(`${fromValue * 100}`)) / 100}
+              value={+fromValue.toFixed(2)}
               onChange={handleFromValueChange}
               min={0}
             />
@@ -103,7 +103,7 @@ const ExchangeRates: React.FC = () => {
             <input
               className="exchange__input"
               type="number"
-              value={(parseInt(`${toValue * 100}`)) / 100}
+              value={+toValue.toFixed(2)}
               onChange={handleToValueChange}
               min={0}
             />
